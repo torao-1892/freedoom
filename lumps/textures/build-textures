@@ -1,33 +1,5 @@
 #!/usr/bin/env python
-#
-# Copyright (c) 2014
-# Contributors to the Freedoom project.  All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-#  * Neither the name of the freedoom project nor the names of its
-#    contributors may be used to endorse or promote products derived from
-#    this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-# IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-# OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+# SPDX-License-Identifier: BSD-3-Clause
 #
 # Texture lump builder for Freedoom
 #
@@ -62,6 +34,7 @@
 # Freedoom IWADs cannot be built in parallel by make.
 
 import collections
+import os.path
 import re
 import sys
 import struct
@@ -189,16 +162,22 @@ def read_names_file(filename):
 				result.append(line.upper())
 		return result
 
-def write_names_file(names, filename):
+def write_names_file(names, filename, sprites_dir):
 	"""Write a list of names to a file.
 
 	Args:
 	  names: List of names to write.
 	  filename: Filename to write them to.
+	  sprites_dir: Path to directory containing sprites. If a file is found
+	      in this directory matching a patch name, that patch will not be
+	      included in the outputted list.
 	"""
 	with open(filename, "w") as f:
 		for name in names:
-			f.write("%s\n" % name)
+			filename = "%s.png" % name.lower()
+			sprite_path = os.path.join(sprites_dir, filename)
+			if not os.path.exists(sprite_path):
+				f.write("%s\n" % name)
 
 def load_compat_textures(textures, compat_file):
 	"""Pre-populate a texture set from a compatibility file.
@@ -292,6 +271,9 @@ Full list of arguments:
   -output_texture2: Path to the TEXTURE2 lump to generate.
   -output_pnames: Path to the PNAMES lump to generate (required).
   -output_pnames_txt: Path to a text file to save a list of PNAMES.
+  -sprites_dir: Path to the sprites directory, used to identify patches which
+      are actually embedded sprites. These sprites will not be included in the
+      outputted pnames file.
   -compat_texture1: File containing compatibility list of TEXTURE1 textures
   -compat_texture2: File containing compatibility list of TEXTURE2 textures
   -compat_pnames: File containing compatibility list of PNAMES
@@ -310,7 +292,7 @@ def parse_command_line(args):
 	# Parse command line:
 	valid_args = ("compat_texture1", "compat_texture2", "compat_pnames",
 	              "output_texture1", "output_texture2", "output_pnames",
-	              "output_pnames_txt")
+	              "output_pnames_txt", "sprites_dir")
 	result = {arg: None for arg in valid_args}
 
 	for arg in args:
@@ -367,5 +349,6 @@ if args["output_texture2"]:
 	texture2.write_texture_lump(args["output_texture2"])
 write_pnames_lump(pnames, args["output_pnames"])
 if args["output_pnames_txt"]:
-	write_names_file(sorted(pnames), args["output_pnames_txt"])
+	write_names_file(sorted(pnames), args["output_pnames_txt"],
+	                 args["sprites_dir"])
 

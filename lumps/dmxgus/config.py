@@ -1,32 +1,4 @@
-#
-# Copyright (c) 2013 Contributors to the Freedoom project.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-#  * Neither the name of the freedoom project nor the names of its
-#    contributors may be used to endorse or promote products derived from
-#    this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-# IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-# OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# --------------------------------------------------------------
+# SPDX-License-Identifier: BSD-3-Clause
 #
 # Config file for GUS config generator.
 #
@@ -302,8 +274,8 @@ PATCH_FILE_SIZES = {
 
 SIMILAR_GROUPS = [
 	# Pianos.
-	('synpiano', 'acpiano', 'britepno', 'honky', 'epiano1', 'epiano2',
-	 'celeste', 'glocken'),
+	('synpiano', 'acpiano', 'britepno', 'honky'),
+	('glocken', 'epiano1', 'epiano2', 'celeste'),
 	# Harpsichord sounds noticeably different to pianos:
 	('hrpschrd', 'clavinet'),
 	# Xylophone etc.
@@ -314,19 +286,19 @@ SIMILAR_GROUPS = [
 	# Accordion/Harmonica:
 	('accordn', 'harmonca', 'concrtna'),
 	# Guitars.
-	('nyguitar', 'acguitar', 'jazzgtr', 'cleangtr', 'mutegtr'),
+	('nyguitar', 'acguitar', 'jazzgtr'),
 	# Overdriven/distortion guitars sound different. Besides, we
 	# definitely want at least one of these.
-	('odguitar', 'distgtr', 'gtrharm'),
+	('odguitar', 'distgtr', 'gtrharm', 'cleangtr', 'bagpipes'),
 	# Basses.
-	('synbass2', 'acbass', 'fngrbass', 'pickbass', 'fretless', 'slapbas1',
-	 'slapbas2', 'synbass1', 'basslead'),
+	('synbass2', 'acbass', 'fngrbass', 'pickbass', 'basslead', 'fretless'),
+	('synbass1', 'slapbas1', 'slapbas2', 'mutegtr'),
 	# Violin and similar string instruments.
-	('violin', 'viola', 'cello', 'contraba', 'tremstr', 'pizzcato',
-	 'harp'),
+	('violin', 'viola', 'cello', 'contraba', 'pizzcato', 'harp'),
 	# Other stringed (?)
 	('synstr2', 'slowstr', 'marcato', 'synstr1', 'choir', 'doo', 'voices',
-	 'orchhit', 'polysyn', 'bowglass'),
+	 'orchhit', 'polysyn', 'bowglass', 'tremstr',
+	 'fantasia', 'warmpad', 'ghostie', 'metalpad', 'sweeper', 'halopad'),
 	# Trumpet and other brass.
 	('trumpet', 'trombone', 'tuba', 'mutetrum', 'frenchrn', 'hitbrass',
 	 'synbras1', 'synbras2'),
@@ -335,23 +307,17 @@ SIMILAR_GROUPS = [
 	 'bassoon', 'clarinet'),
 	# Pipe instruments.
 	('recorder', 'flute', 'piccolo', 'woodflut', 'bottle', 'shakazul',
-	 'whistle', 'ocarina', 'bagpipes', 'fiddle', 'shannai',
-	 'calliope', 'chiflead', 'charang'),
+	 'whistle', 'ocarina', 'fiddle', 'shannai', 'calliope', 'chiflead',
+	 'charang'),
 	# Leads:
 	('sqrwave', 'sawwave', 'voxlead', 'lead5th'),
 	# Odd stringed instruments.
 	('sitar', 'banjo', 'shamisen', 'koto'),
-	# Special effects. Blank unless popular enough to appear.
-	('blank', 'fantasia', 'warmpad', 'ghostie',
-	 'metalpad', 'halopad', 'sweeper', 'aurora', 'soundtrk', 'crystal',
-	 'atmosphr', 'freshair', 'unicorn', 'echovox', 'startrak', 'fx-fret',
-	 'fx-blow', 'seashore', 'jungle', 'telephon', 'helicptr', 'applause',
-	 'pistol'),
 
 	# Percussion sounds.
 
 	# Kick:
-	('kick2', 'steeldrm', 'taiko', 'kick1'),
+	('kick2', 'taiko', 'kick1'),
 	# Conga:
 	('congahi2', 'congahi1', 'congalo'),
 	# Snare drums:
@@ -362,16 +328,23 @@ SIMILAR_GROUPS = [
 	# Cymbal crash:
 	('cymsplsh', 'cymcrsh2', 'cymcrsh1', 'revcym', 'cymchina'),
 	# Cymbal ride:
-	('cymride1', 'cymride2', 'cymbell'),
+	('cymride1', 'cymride2', 'cymbell', 'hihatop'),
 	# Hi-hat:
-	('hihatpd', 'hihatcl', 'hihatop'),
+	('hihatpd', 'hihatcl'),
 	# Metallic sounding:
-	('bongohi', 'bongolo', 'timbaleh', 'timbalel', 'cowbell',
-	 'agogohi', 'agogolo', 'agogo', 'triangl1', 'triangl2'),
+	('bongohi', 'bongolo', 'timbaleh', 'timbalel', 'cowbell'),
 	# Click:
-	('stickrim', 'woodblk1', 'woodblk2', 'woodblk', 'tamborin', 'clave'),
-	# Random things.
-	('cabasa', 'whistle1', 'whistle2', 'vibslap', 'maracas',
-	 'guiro1', 'guiro2', 'cuica1', 'cuica2'),
+	('stickrim', 'woodblk1', 'woodblk2', 'woodblk', 'clave'),
+
+	# Random instruments we don't include unless they're popular enough.
+	('blank',
+	 # Special effects:
+	 'unicorn', 'soundtrk', 'aurora', 'crystal', 'atmosphr', 'freshair',
+	 'echovox', 'startrak', 'fx-fret', 'fx-blow', 'seashore', 'jungle',
+	 'telephon', 'helicptr', 'applause', 'pistol',
+	 # Percussion:
+	 'cabasa', 'whistle1', 'whistle2', 'vibslap', 'maracas', 'guiro1',
+	 'guiro2', 'cuica1', 'cuica2', 'steeldrm', 'agogohi', 'agogolo',
+	 'agogo', 'triangl1', 'triangl2' , 'tamborin'),
 ]
 

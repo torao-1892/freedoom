@@ -8,7 +8,7 @@ system.
 Freedoom is built using 'deutex', which is a command-line tool for
 automated building of Doom WAD files.  However, multiple different WAD
 files are built from the Freedoom material.  Therefore, the Freedoom
-build system is more complicated than a ``normal'' deutex build would
+build system is more complicated than a “normal” deutex build would
 otherwise be.
 
 A top-level +Makefile+ controls the build system and executes the
@@ -33,10 +33,6 @@ following diagram illustrates the process:
          ┌───┴────┐           │            │
          │  cpp   ├───────────┘            │
          └───┬────┘                        │
-             │                             │
-   ┌─────────┴──────────┐                  │
-   │ wadinfo─builder.py │                  │
-   └─────────┬──────────┘                  │
              │                             │
         wadinfo.txt                        │
              │                             │
@@ -145,9 +141,6 @@ WAD files that are built:
 | +wadinfo_freedm.txt+ | +freedm.wad+       | FREEDM
 |===============================================================
 
-+wadinfo.txt+ differs from the others in that the '-dummy' option is
-not passed to the +wadinfo-builder.py+ script.
-
 == Auxiliary scripts
 
 The build system uses a number of auxiliary scripts in order to
@@ -166,21 +159,6 @@ The +simplecpp+ script is used in preference to the actual +cpp+
 preprocessor, firstly so that it is not necessary to install +cpp+,
 and secondly because processing with +cpp+ can alter the layout of the
 output file.
-
-=== +wadinfo-builder.py+
-
-This script processes the +wadinfo.txt+ used to build the WAD file,
-and identifies resources specified in the file that do not yet exist.
-This is to deal with the fact that Freedoom is incomplete and not all
-of the material needed for a complete WAD has yet been submitted.
-
-Different strategies are used to cope with these missing resources
-depending on the WAD file being built.  For IWAD builds, dummy
-resources are substituted for the missing resources (this mode is
-activated using the +-dummy+ command line parameter).  For resource
-WAD builds, the missing resources are commented out in the output file
-so that they are missing from the WAD that is built.  This is the
-default behavior.
 
 === +build-textures+
 
@@ -204,7 +182,7 @@ It reads level names from the dehacked lumps.
 
 Found in +lumps/cph/misc-lumps+, this script builds the +PLAYPAL+
 lump which contains the 256-color palettes used for special
-effects (injured "red" flash, the green "radiation suit" effect,
+effects (injured “red” flash, the green “radiation suit” effect,
 etc.)
 
 === +colormap.py+
@@ -214,7 +192,7 @@ lump that is used for the diminished lighting within the game.
 This script is also reused to generate additional colormaps that
 can be used for special effects. It has a number of command line
 options that allow it to do various different colorizing and
-"fog" effects.
+“fog” effects.
 
 === +mkgenmidi+
 
@@ -258,15 +236,6 @@ directories to generate the WAD:
 deutex is an old tool and has various quirks that must be worked
 around.  Some of them are listed here.
 
- * The default background color for sprites is magenta.  The
-   ``standard'' background color of cyan is used instead by providing
-   the +-rgb 0 255 255+ command line parameter.
-
- * By default, deutex attempts to convert sound effects to 11,025Hz
-   format.  To keep the existing sample rate of sound effects, the
-   following command line parameters are provided:
-   +-v0 -fullsnd -rate accept+
-
  * deutex does not allow the exact path to the +texture1.txt+ file to
    be specified in the configuration file; this used to be a problem
    but the Freedoom's texture lumps are now built using a custom
@@ -274,6 +243,6 @@ around.  Some of them are listed here.
 
  * deutex requires an existing IWAD file in order to build WAD files,
    and includes the contents of the +TEXTURE1+ lump from the IWAD in
-   any +TEXTURE1+ lumps it generates.  To work around this, a ``dummy''
+   any +TEXTURE1+ lumps it generates.  To work around this, a “dummy”
    IWAD file containing an empty +TEXTURE1+ lump is contained inside
    the +dummy+ directory.

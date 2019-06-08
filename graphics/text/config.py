@@ -1,33 +1,4 @@
-#
-# Copyright (c) 2013-2014
-# Contributors to the Freedoom project.  All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-#  * Neither the name of the freedoom project nor the names of its
-#    contributors may be used to endorse or promote products derived from
-#    this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-# IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-# PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
-# OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-# ----------------------------------------------------------------------
+# SPDX-License-Identifier: BSD-3-Clause
 #
 # Configuration file for textgen. This file defines the graphic lumps
 # that are generated, and the text to show in each one.
@@ -57,7 +28,7 @@ FONT_KERNING_RULES = {
 	# Left character fits under right character:
 	r'L[TY]': -4,
 	r'L[014COQV]': -3,
-	r'L[O09]': -2,
+	r'L[9]': -2,
 	r'[0O][4TY]': -2,
 	r'[0O][1]': -1,
 	r'Q[1T]': -2,
@@ -94,6 +65,10 @@ white_graphics = {
 	'wibp4': 'P4',
 	'wicolon': ':',
 
+	# These files are for the title screens of Phase 1 and Phase 2
+	't_phase1': 'PHASE 1',
+	't_phase2': 'PHASE 2',
+
 	# Note: level names are also included in this dictionary, with
 	# the data added programatically from the DEHACKED lump, see
 	# code below.
@@ -124,6 +99,8 @@ red_graphics = {
 	'm_epi2': 'Military Labs',
 	'm_epi3': 'Event Horizon',
 	'm_epi4': 'Double Impact',
+	'm_epi5': 'Phase 2',
+	'm_epi6': 'The Missing Levels',
 
 	'm_jkill': 'Please don\'t kill me!',
 	'm_rough': 'Will this hurt?',
@@ -219,6 +196,12 @@ red_graphics = {
 	# match the other main menu graphics. Eternity Engine doesn't
 	# use it any more, and on SMMU there's enough space for it.
 	'm_multi': 'Multiplayer',
+
+	# Doom 3: BFG Edition support
+	'm_acpt': 'accept',
+	'm_can': 'cancel',
+	'm_chg': 'change game',
+	'm_exito': 'are you sure?',
 }
 
 def read_bex_lump(filename):
@@ -268,9 +251,8 @@ for e in range(4):
 		update_level_name('wilv%i%i' % (e, m), freedoom_bex,
 		                  'HUSTR_E%iM%i' % (e + 1, m + 1))
 
-for m in range(32):
+for m in range(33):
 	# HUSTR_1 => cwilv00
 	update_level_name('cwilv%02i' % m, freedoom_bex, 'HUSTR_%i' % (m + 1))
 	# HUSTR_1 => dmwilv00 (from freedm.bex)
 	update_level_name('dmwilv%02i' % m, freedm_bex, 'HUSTR_%i' % (m + 1))
-

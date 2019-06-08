@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2014-2015 Contributors to the Freedoom project -->
-<!-- Copyright 2014 Edgar Muniz Berlinck <edgar.vv@gmail.com> -->
+<!-- SPDX-License-Identifier: BSD-3-Clause -->
 
 <component type="desktop">
   <id>freedoom1.desktop</id>
@@ -28,20 +27,26 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://freedoom.github.io/img/screenshots/phase1-0.10_01.png</image>
-      <caption>C1M7: Research Labs</caption>
+      <image>https://freedoom.github.io/img/screenshots/phase1-0.11_01.png</image>
+      <caption>C1M6: Training Facility</caption>
     </screenshot>
     <screenshot>
-      <image>https://freedoom.github.io/img/screenshots/phase1-0.10_03.png</image>
-      <caption>C2M7</caption>
+      <image>https://freedoom.github.io/img/screenshots/phase1-0.11_03.png</image>
+      <caption>C3M6: Igneous Intrusion</caption>
     </screenshot>
     <screenshot>
-      <image>https://freedoom.github.io/img/screenshots/phase1-0.10_05.png</image>
-      <caption>C3M9: Acquainted With Grief</caption>
+      <image>https://freedoom.github.io/img/screenshots/phase1-0.11_05.png</image>
+      <caption>C4M3: Central Computing</caption>
     </screenshot>
     <screenshot>
-      <image>https://freedoom.github.io/img/screenshots/phase1-0.10_07.png</image>
-      <caption>C4M2: Research Complex</caption>
+      <image>https://freedoom.github.io/img/screenshots/phase1-0.11_07.png</image>
+      <caption>C2M2: Power Plant</caption>
     </screenshot>
   </screenshots>
+  <releases>
+    <release version="0.11.3" date="2017-07-18"></release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-bloodshed">intense</content_attribute>
+  </content_rating>
 </component>
